@@ -11,7 +11,7 @@ Enriquecer las implementaciones de **Insertion Sort**, **Merge Sort** y **Quick 
 - Cada modificación del array (desplazamientos, intercambios, fusiones).
 - Indentación según profundidad de recursión.
 - Casos base explícitos.
-- **No se modificó la lógica original** de ningún algoritmo.
+- **No he modificó la lógica original** de ningún algoritmo.
 
 ## Algoritmos Implementados
 
