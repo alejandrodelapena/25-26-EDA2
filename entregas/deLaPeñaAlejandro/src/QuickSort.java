@@ -6,6 +6,11 @@ public class QuickSort {
         System.out.println(mensaje + " " + Arrays.toString(array));
     }
 
+    private static void printArray(int[] array, String mensaje, int nivel) {
+        System.out.print("    ".repeat(nivel));
+        System.out.println(mensaje + " " + Arrays.toString(array));
+    }
+
     private static void printIndented(int nivel, String mensaje) {
         System.out.print("    ".repeat(nivel));
         System.out.println(mensaje);
@@ -21,17 +26,15 @@ public class QuickSort {
         printIndented(izquierda, "→ Llamada: quickSort([" + izquierda + ".." + derecha + "])");
 
         if (izquierda >= derecha) {
-            printIndented(izquierda, "   Caso base: subarray vacío o de 1 elemento → ya ordenado");
+            printIndented(izquierda, "   Caso base alcanzado (subarray de 0 o 1 elemento)");
             return;
         }
 
-        printIndented(izquierda, "   Pivote seleccionado: array[" + derecha + "] = " + array[derecha]);
+        printIndented(izquierda, "   Seleccionando pivote: array[" + derecha + "] = " + array[derecha]);
 
         int indicePivote = particionar(array, izquierda, derecha);
 
-        printIndented(izquierda, "   Pivote colocado en posición " + indicePivote 
-                               + " → Valor: " + array[indicePivote]);
-
+        printIndented(izquierda, "   Pivote colocado definitivamente en posición " + indicePivote);
         printArray(array, "   Array después de particionar:", izquierda);
 
         ordenar(array, izquierda, indicePivote - 1);
@@ -46,8 +49,7 @@ public class QuickSort {
 
         for (int j = izquierda; j < derecha; j++) {
             System.out.print("    ".repeat(izquierda + 1));
-            System.out.println("Comparando: array[" + j + "]=" + array[j] 
-                             + " <= " + pivote + " ?");
+            System.out.println("Comparando: array[" + j + "]=" + array[j] + " <= " + pivote + " ?");
 
             if (array[j] <= pivote) {
                 i++;
@@ -58,15 +60,14 @@ public class QuickSort {
                     printArray(array, "       → Intercambio realizado (i=" + i + ", j=" + j + "):", izquierda + 1);
                 } else {
                     System.out.print("    ".repeat(izquierda + 1));
-                    System.out.println("       → Elemento ya en posición correcta");
+                    System.out.println("       → Elemento ya en su lugar");
                 }
             } else {
                 System.out.print("    ".repeat(izquierda + 1));
-                System.out.println("       → Elemento mayor que pivote, se queda a la derecha");
+                System.out.println("       → Elemento mayor que pivote (se queda a la derecha)");
             }
         }
 
-        // Colocar el pivote en su posición final
         int temporal = array[i + 1];
         array[i + 1] = array[derecha];
         array[derecha] = temporal;
@@ -77,11 +78,15 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] array = {5, 2, 8, 1, 9, 3};
+        int[] original = {5, 2, 8, 1, 9, 3};
         
-        System.out.println("=== PRUEBA QUICK SORT ===\n");
-        
-        int[] arr1 = array.clone();
-        ordenarRecursivo(arr1);
+        System.out.println("=".repeat(90));
+        System.out.println("          QUICK SORT RECURSIVO");
+        System.out.println("Array original: " + Arrays.toString(original));
+        System.out.println("=".repeat(90) + "\n");
+
+        ordenarRecursivo(original.clone());
+
+        System.out.println("\n" + "=".repeat(90));
     }
 }
